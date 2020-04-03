@@ -524,6 +524,7 @@ MStatus AlembicNode::compute(const MPlug & plug, MDataBlock & dataBlock)
         if( storedFilenames.length() == 0 )
         {
             MFileObject fileObject;
+            fileObject.setResolveMethod(MFileObject::kInputReference);
             MDataHandle dataHandle = dataBlock.inputValue(mAbcFileNameAttr);
             fileObject.setRawFullName(dataHandle.asString());
             MString fileName = fileObject.resolvedFullName();
