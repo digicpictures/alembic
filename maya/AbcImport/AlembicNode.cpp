@@ -534,7 +534,12 @@ MStatus AlembicNode::compute(const MPlug & plug, MDataBlock & dataBlock)
         std::vector<std::string> abcFilenames;
         for(unsigned int i = 0; i < storedFilenames.length(); i++)
         {
-            abcFilenames.push_back( storedFilenames[i].asChar() );
+            //abcFilenames.push_back( storedFilenames[i].asChar() );
+            MFileObject fileObject;
+            fileObject.setResolveMethod(MFileObject::kInputReference);
+            fileObject.setRawFullName(storedFilenames[i]);
+            MString fileName = fileObject.resolvedFullName();
+            abcFilenames.push_back( fileName.asChar() );
         }
 
         Alembic::Abc::IArchive archive;
